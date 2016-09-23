@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Ruby Client for Mustard Results Server}
   spec.description   = %q{Ruby Client for Mustard Results Server}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/Orasi/Mustard-Ruby"
   spec.license       = "BSD"
 
   spec.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENSE.txt)
