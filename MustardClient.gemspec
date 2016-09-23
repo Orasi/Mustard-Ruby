@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/Orasi/Mustard-Ruby"
   spec.license       = "BSD"
 
-  spec.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENSE.txt)
+  spec.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENSE)
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
