@@ -51,7 +51,7 @@ module MustardClient
     end
 
     def testcases
-      TestcaseClient.new(@mustard_url, @user_token)
+      TestcasesClient.new(@mustard_url, @user_token)
     end
 
     def teams
