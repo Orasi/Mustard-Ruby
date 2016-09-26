@@ -1,5 +1,6 @@
+require 'MustardClient/client'
 module MustardClient
-  class Teams < MustardClient
+  class TeamsClient < Client
 
     def all
 

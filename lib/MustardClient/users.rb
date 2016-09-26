@@ -1,5 +1,6 @@
+require 'MustardClient/client'
 module MustardClient
-  class Users < MustardClient
+  class UsersClient < Client
 
     def all
 

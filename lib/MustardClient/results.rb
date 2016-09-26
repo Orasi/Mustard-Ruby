@@ -1,5 +1,6 @@
+require 'MustardClient/client'
 module MustardClient
-  class Results < MustardClient
+  class ResultsClient < Client
 
     def find result_id
 

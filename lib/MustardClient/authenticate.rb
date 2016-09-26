@@ -1,5 +1,6 @@
+require 'MustardClient/client'
 module MustardClient
-  class Authenticate < MustardClient
+  class AuthenticateClient < Client
 
     def authenticate(username, password)
 

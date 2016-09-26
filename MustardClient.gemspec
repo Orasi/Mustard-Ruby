@@ -12,9 +12,9 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Ruby Client for Mustard Results Server}
   spec.description   = %q{Ruby Client for Mustard Results Server}
   spec.homepage      = "https://github.com/Orasi/Mustard-Ruby"
-  spec.license       = "BSD"
+  spec.license       = "bsd4"
 
-  spec.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENSE)
+  spec.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENSE README.md)
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]

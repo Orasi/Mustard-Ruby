@@ -1,5 +1,6 @@
+require 'MustardClient/client'
 module MustardClient
-  class Executions < MustardClient
+  class ExecutionsClient < Client
 
     def find execution_id
 

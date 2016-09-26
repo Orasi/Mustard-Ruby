@@ -1,52 +1,5 @@
 require "MustardClient/version"
 require 'rest-client'
-
-module MustardClient
-
-  class MustardClient
-
-    attr_accessor :mustard_url, :user_token
-
-    @user_token
-    @mustard_url
-
-    def initialize
-      @mustard_url = 'localhost:8081'
-    end
-
-    def set_user_token token
-      @user_token = token
-    end
-
-    def execute(command)
-
-      raise Exception if command[:method].nil? || command[:route].nil?
-
-      #Suppress errors that return a response
-      begin
-        if command[:method] == :get
-          r = RestClient.get command[:route], command[:headers]
-        elsif command[:method] == :post
-          r = RestClient.post command[:route], command[:params], command[:headers]
-        elsif command[:method] == :put
-          r = RestClient.put command[:route], command[:params], command[:headers]
-        elsif command[:method] == :delete
-          r = RestClient.delete command[:route], command[:headers]
-        end
-      rescue RestClient::ExceptionWithResponse => e
-        r =e.response
-      end
-
-      JSON.parse(r)
-      #end
-    end
-
-
-  end
-
-
-end
-
 require 'MustardClient/users'
 require 'MustardClient/authenticate'
 require 'MustardClient/projects'
@@ -56,3 +9,69 @@ require 'MustardClient/environments'
 require 'MustardClient/results'
 require 'MustardClient/executions'
 require 'json'
+
+module MustardClient
+
+  class Mustard
+
+    attr_accessor :mustard_url, :user_token
+
+    @user_token
+    @mustard_url
+
+    def initialize(url= 'localhost:8081', token=nil)
+      @mustard_url = url
+      @user_token = token
+    end
+
+    def set_user_token token
+      @user_token = token
+    end
+
+    def set_mustard_url url
+      @mustard_url = url
+    end
+
+    def authenticate(username, password)
+      a = AuthenticateClient.new(@mustard_url, @user_token)
+      r = a.authenticate(username, password)
+      unless r['error']
+        @user_token = r['token']
+      end
+
+      return r
+    end
+
+    def users
+      UsersClient.new(@mustard_url, @user_token)
+    end
+
+    def projects
+      ProjectsClient.new(@mustard_url, @user_token)
+    end
+
+    def testcases
+      TestcaseClient.new(@mustard_url, @user_token)
+    end
+
+    def teams
+      TeamsClient.new(@mustard_url, @user_token)
+    end
+
+    def envirnments
+      EnvironmentsClient.new(@mustard_url, @user_token)
+    end
+
+    def results
+      ResultsClient.new(@mustard_url, @user_token)
+    end
+
+    def executions
+      ExecutionsClient.new(@mustard_url, @user_token)
+    end
+
+
+  end
+
+
+end

@@ -1,5 +1,6 @@
+require 'MustardClient/client'
 module MustardClient
-  class Environments < MustardClient
+  class EnvironmentsClient < Client
 
     def find environment_id
 
