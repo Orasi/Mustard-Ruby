@@ -19,11 +19,20 @@ module MustardClient
       command[:method] = :post
       command[:route] = @mustard_url + "/results"
       command[:params] = {result: result_params}
-      command[:headers] = {'User-Token' => @user_token}
 
       execute(command)
 
     end
+
+  end
+
+  def screenshot result_id, screenshot_id
+
+    command = {}
+    command[:method] = :get
+    command[:route] = @mustard_url + "/results/#{result_id}/screenshot/#{screenshot_id}"
+
+    execute(command)
 
   end
 end

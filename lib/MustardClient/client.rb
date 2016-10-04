@@ -1,3 +1,4 @@
+require 'MustardClient/mustard_errors'
 module MustardClient
   class Client
 
@@ -22,7 +23,9 @@ module MustardClient
           r = RestClient.delete command[:route], command[:headers]
         end
       rescue RestClient::ExceptionWithResponse => e
-        r =e.response
+        r = e.response
+
+        raise SessionExpiredError if r.include? "Invalid User Token"
       end
 
       JSON.parse(r)
