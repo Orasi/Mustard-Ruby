@@ -24,15 +24,15 @@ module MustardClient
 
     end
 
-  end
+    def screenshot result_id, screenshot_id
 
-  def screenshot result_id, screenshot_id
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/results/#{result_id}/screenshot/#{screenshot_id}"
 
-    command = {}
-    command[:method] = :get
-    command[:route] = @mustard_url + "/results/#{result_id}/screenshot/#{screenshot_id}"
+      execute(command)
 
-    execute(command)
+    end
 
   end
 end
