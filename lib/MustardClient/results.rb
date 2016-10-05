@@ -29,6 +29,7 @@ module MustardClient
       command = {}
       command[:method] = :get
       command[:route] = @mustard_url + "/results/#{result_id}/screenshot/#{screenshot_id}"
+      command[:headers] = {'User-Token' => @user_token}
 
       execute(command)
 

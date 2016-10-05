@@ -58,7 +58,7 @@ module MustardClient
       TeamsClient.new(@mustard_url, @user_token)
     end
 
-    def envirnments
+    def environments
       EnvironmentsClient.new(@mustard_url, @user_token)
     end
 
