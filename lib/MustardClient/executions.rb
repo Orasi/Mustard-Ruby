@@ -75,11 +75,17 @@ module MustardClient
     end
 
 
-    def close execution_id
+    def close execution_id: nil, project_key: nil
+
+      if project_key
+        route = "/executions/close?project_key=#{project_key}"
+      else
+        route = "/executions/close?execution_id=#{execution_id}"
+      end
 
       command = {}
       command[:method] = :post
-      command[:route] = @mustard_url + "/executions/#{execution_id}"
+      command[:route] = @mustard_url + route
       command[:headers] = {'User-Token' => @user_token}
 
       execute(command)
