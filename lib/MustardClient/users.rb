@@ -58,5 +58,27 @@ module MustardClient
       execute(command)
 
     end
+
+    def trigger_password_reset user_id, redirect_url
+
+      command = {}
+      command[:method] = :post
+      command[:route] = @mustard_url + "/users/#{user_id}/reset-password"
+      command[:params] = {'redirect-to' => redirect_url}
+
+      execute(command)
+
+    end
+
+    def reset_password user_id, password_token, new_password
+
+      command = {}
+      command[:method] = :post
+      command[:route] = @mustard_url + "/users/#{user_id}/reset-password/#{password_token}"
+      command[:params] = {'user' => {'password' => new_password}}
+
+      execute(command)
+
+    end
   end
 end

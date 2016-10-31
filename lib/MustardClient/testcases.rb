@@ -59,5 +59,16 @@ module MustardClient
       execute(command)
 
     end
+
+    def export project_id
+
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/projects/#{project_id}/testcases/export.xlsx"
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
   end
 end

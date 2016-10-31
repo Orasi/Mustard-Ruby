@@ -13,6 +13,7 @@ module MustardClient
 
     end
 
+
     def add result_params
 
       command = {}
