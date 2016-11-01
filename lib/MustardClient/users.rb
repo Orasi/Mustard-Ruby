@@ -24,6 +24,17 @@ module MustardClient
 
     end
 
+    def find_by_username username
+
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/users/find/#{ username}"
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
+
     def add user_params
 
       command = {}
@@ -59,12 +70,12 @@ module MustardClient
 
     end
 
-    def trigger_password_reset user_id, redirect_url
+    def trigger_password_reset username, redirect_url
 
       command = {}
       command[:method] = :post
-      command[:route] = @mustard_url + "/users/#{user_id}/reset-password"
-      command[:params] = {'redirect-to' => redirect_url}
+      command[:route] = @mustard_url + "/users/reset-password"
+      command[:params] = {'redirect-to' => redirect_url, username: username}
 
       execute(command)
 
