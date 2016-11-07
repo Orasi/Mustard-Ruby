@@ -63,6 +63,30 @@ module MustardClient
     end
 
 
+    def testcase_count execution_id
+
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/executions/#{execution_id}/testcase-count"
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
+
+
+    def environment_count execution_id
+
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/executions/#{execution_id}/environment-count"
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
+
+
     def find execution_id
 
       command = {}

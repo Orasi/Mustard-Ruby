@@ -2,6 +2,18 @@ require 'MustardClient/client'
 module MustardClient
   class ResultsClient < Client
 
+    def recent
+
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/recent-results"
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
+
+
     def find result_id
 
       command = {}
