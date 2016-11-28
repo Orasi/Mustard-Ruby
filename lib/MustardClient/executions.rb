@@ -51,11 +51,15 @@ module MustardClient
     end
 
 
-    def testcase_status execution_id
+    def testcase_status execution_id, format=nil
 
       command = {}
       command[:method] = :get
-      command[:route] = @mustard_url + "/executions/#{execution_id}/testcase_status"
+      if format
+        command[:route] = @mustard_url + "/executions/#{execution_id}/testcase_status.#{format}"
+      else
+        command[:route] = @mustard_url + "/executions/#{execution_id}/testcase_status"
+      end
       command[:headers] = {'User-Token' => @user_token}
 
       execute(command)
