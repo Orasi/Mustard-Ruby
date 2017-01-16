@@ -75,7 +75,7 @@ module MustardClient
       command = {}
       command[:method] = :post
       command[:route] = @mustard_url + "/users/reset-password"
-      command[:params] = {'redirect-to' => redirect_url, username: username}
+      command[:params] = {user: {username: username}, 'redirect-to' => redirect_url, }
 
       execute(command)
 
@@ -86,7 +86,7 @@ module MustardClient
       command = {}
       command[:method] = :post
       command[:route] = @mustard_url + "/users/#{user_id}/reset-password/#{password_token}"
-      command[:params] = {'user' => {'password' => new_password}}
+      command[:params] = {user: {'password' => new_password}}
 
       execute(command)
 
