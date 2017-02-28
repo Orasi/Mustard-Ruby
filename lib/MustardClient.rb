@@ -36,7 +36,7 @@ module MustardClient
       a = AuthenticateClient.new(@mustard_url, @user_token)
       r = a.authenticate(username, password)
       unless r['error']
-        @user_token = r['token']
+        @user_token = r['user']['token']
       end
 
       return r

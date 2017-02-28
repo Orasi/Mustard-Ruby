@@ -60,6 +60,18 @@ module MustardClient
 
     end
 
+    def import_file project_id, file, preview: false, update: false
+
+      command = {}
+      command[:method] = :post
+      command[:route] = @mustard_url + "/projects/#{project_id}/import"
+      command[:headers] = {'User-Token' => @user_token}
+      command[:params] = {preview: preview, update: update, file: file}
+
+      execute(command)
+
+    end
+
     def export project_id
 
       command = {}
