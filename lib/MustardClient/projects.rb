@@ -58,5 +58,17 @@ module MustardClient
       execute(command)
 
     end
+
+    def environments project_id
+
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/projects/#{project_id}/environments"
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
+
   end
 end

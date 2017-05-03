@@ -70,6 +70,10 @@ module MustardClient
       ExecutionsClient.new(@mustard_url, @user_token)
     end
 
+    def keywords
+      KeywordsClient.new(@mustard_url, @user_token)
+    end
+
 
   end
 

@@ -48,25 +48,25 @@ module MustardClient
 
     end
 
-    def import project_id, testcase_params, preview: false, update: false
+    def import project_id, json, preview: false, update: false
 
       command = {}
       command[:method] = :post
       command[:route] = @mustard_url + "/projects/#{project_id}/import"
       command[:headers] = {'User-Token' => @user_token}
-      command[:params] = {preview: preview, update: update, csv: testcase_params}
+      command[:params] = { update: update, json: json}
 
       execute(command)
 
     end
 
-    def import_file project_id, file, preview: false, update: false
+    def parse project_id, file
 
       command = {}
       command[:method] = :post
-      command[:route] = @mustard_url + "/projects/#{project_id}/import"
+      command[:route] = @mustard_url + "/projects/#{project_id}/parse"
       command[:headers] = {'User-Token' => @user_token}
-      command[:params] = {preview: preview, update: update, file: file}
+      command[:params] = { file: file}
 
       execute(command)
 
