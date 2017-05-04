@@ -8,6 +8,7 @@ require 'MustardClient/teams'
 require 'MustardClient/environments'
 require 'MustardClient/results'
 require 'MustardClient/executions'
+require 'MustardClient/keywords'
 require 'json'
 
 module MustardClient

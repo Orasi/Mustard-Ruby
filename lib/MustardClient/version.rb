@@ -1,3 +1,3 @@
 module MustardClient
-  VERSION = "0.1.34"
+  VERSION = "0.1.43"
 end

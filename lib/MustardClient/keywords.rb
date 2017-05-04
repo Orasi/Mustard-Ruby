@@ -13,12 +13,18 @@ module MustardClient
 
     end
 
-    def add keyword_params
+    def add keyword_params, testcase_ids: false
 
       command = {}
       command[:method] = :post
       command[:route] = @mustard_url + "/keywords"
-      command[:params] = {keyword: keyword_params}
+
+      if testcase_ids
+        command[:params] = {keyword: keyword_params, testcase_ids: testcase_ids}
+      else
+        command[:params] = {keyword: keyword_params}
+      end
+
       command[:headers] = {'User-Token' => @user_token}
 
       execute(command)
@@ -36,13 +42,18 @@ module MustardClient
 
     end
 
-    def update keyword_id, keyword_params
+    def update keyword_id, keyword_params, testcase_ids: false
 
       command = {}
       command[:method] = :put
       command[:route] = @mustard_url + "/keywords/#{keyword_id}"
       command[:headers] = {'User-Token' => @user_token}
-      command[:params] = {keyword: keyword_params}
+
+      if testcase_ids
+        command[:params] = {keyword: keyword_params, testcase_ids: testcase_ids}
+      else
+        command[:params] = {keyword: keyword_params}
+      end
 
       execute(command)
 
