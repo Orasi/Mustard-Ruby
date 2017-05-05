@@ -20,7 +20,7 @@ module MustardClient
       command[:route] = @mustard_url + "/keywords"
 
       if testcase_ids
-        command[:params] = {keyword: keyword_params, testcase_ids: testcase_ids}
+        command[:params] = {keyword: keyword_params, testcases: testcase_ids}
       else
         command[:params] = {keyword: keyword_params}
       end
@@ -50,7 +50,7 @@ module MustardClient
       command[:headers] = {'User-Token' => @user_token}
 
       if testcase_ids
-        command[:params] = {keyword: keyword_params, testcase_ids: testcase_ids}
+        command[:params] = {keyword: keyword_params, testcases: testcase_ids}
       else
         command[:params] = {keyword: keyword_params}
       end

@@ -133,11 +133,16 @@ module MustardClient
 
     end
 
-    def next_test execution_id
+    def next_test execution_id, keyword: false
 
       command = {}
       command[:method] = :get
-      command[:route] = @mustard_url + "/executions/#{execution_id}/next_test"
+      if keyword
+        command[:route] = @mustard_url + "/executions/#{execution_id}/next_test?keyword=#{keyword.upcase}"
+      else
+        command[:route] = @mustard_url + "/executions/#{execution_id}/next_test"
+      end
+
       command[:headers] = {'User-Token' => @user_token}
 
       execute(command)

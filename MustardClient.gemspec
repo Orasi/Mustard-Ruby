@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Ruby Client for Mustard Results Server}
   spec.description   = %q{Ruby Client for Mustard Results Server}
   spec.homepage      = "https://github.com/Orasi/Mustard-Ruby"
-  spec.license       = "bsd4"
+  spec.license       = "BSD-4-Clause"
 
   spec.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENSE README.md)
   spec.bindir        = "exe"

@@ -70,5 +70,38 @@ module MustardClient
 
     end
 
+    def keywords project_id
+
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/projects/#{project_id}/keywords"
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
+
+    def testcases project_id
+
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/projects/#{project_id}/testcases"
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
+
+    def executions project_id
+
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/projects/#{project_id}/executions"
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
+
   end
 end
