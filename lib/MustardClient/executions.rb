@@ -51,6 +51,18 @@ module MustardClient
     end
 
 
+    def keyword_summary execution_id
+
+      command = {}
+      command[:method] = :get
+      command[:route] = @mustard_url + "/executions/#{execution_id}/keyword_summary"
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
+
+
     def testcase_status execution_id, format=nil
 
       command = {}
@@ -133,14 +145,18 @@ module MustardClient
 
     end
 
-    def next_test execution_id, keyword: false
+    def next_test execution_id, keywords: []
+
+      keywords = [keywords] unless keywords.kind_of? Array
 
       command = {}
       command[:method] = :get
-      if keyword
-        command[:route] = @mustard_url + "/executions/#{execution_id}/next_test?keyword=#{keyword.upcase}"
-      else
+
+      if keywords.blank?
         command[:route] = @mustard_url + "/executions/#{execution_id}/next_test"
+      else
+        keywords_string = keywords.map{|keyword| "keyword[]=#{keyword.upcase}"}.join('&')
+        command[:route] = @mustard_url + "/executions/#{execution_id}/next_test?#{keywords_string}"
       end
 
       command[:headers] = {'User-Token' => @user_token}
@@ -149,5 +165,35 @@ module MustardClient
 
     end
 
+    def incomplete_tests execution_id, keywords: []
+
+      keywords = [keywords] unless keywords.kind_of? Array
+
+      command = {}
+      command[:method] = :get
+
+      if keywords.blank?
+        command[:route] = @mustard_url + "/executions/#{execution_id}/incomplete_tests"
+      else
+        keywords_string = keywords.map{|keyword| "keyword[]=#{keyword.upcase}"}.join('&')
+        command[:route] = @mustard_url + "/executions/#{execution_id}/next_test?#{keywords_string}"
+      end
+
+      command[:headers] = {'User-Token' => @user_token}
+
+      execute(command)
+
+    end
+
+  end
+
+  private
+
+  def parse_keywords keyword
+    if keyword.kind_of? Array
+      return keyword
+    else
+      return [keyword]
+    end
   end
 end
