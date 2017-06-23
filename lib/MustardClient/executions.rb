@@ -114,8 +114,20 @@ module MustardClient
 
     end
 
+    def update execution_id, execution_params
 
-    def close execution_id: nil, project_key: nil, name: nil
+      command = {}
+      command[:method] = :put
+      command[:route] = @mustard_url + "/executions/#{execution_id}"
+      command[:headers] = {'User-Token' => @user_token}
+      command[:params] = {execution: execution_params}
+
+      execute(command)
+
+    end
+
+
+    def close execution_id: nil, project_key: nil, new_execution_params: nil
 
       if project_key
         route = "/executions/close?project_key=#{project_key}"
@@ -126,7 +138,7 @@ module MustardClient
       command = {}
       command[:method] = :post
       command[:route] = @mustard_url + route
-      command[:params] = {execution: {name: name}} if name
+      command[:params] = {execution: new_execution_params} if new_execution_params
       command[:headers] = {'User-Token' => @user_token}
 
       execute(command)
@@ -145,18 +157,21 @@ module MustardClient
 
     end
 
-    def next_test execution_id, keywords: []
+    def next_test execution_id, keywords: [], environment: nil
 
       keywords = [keywords] unless keywords.kind_of? Array
 
       command = {}
       command[:method] = :get
+      keyword_string = ''
+      keyword_string += keywords.map{|keyword| "keyword[]=#{keyword.upcase}"}.join('&') unless keywords.blank?
+      keyword_string += "#{keyword_string != '' ? '&' : ''}environment=#{environment}"
 
-      if keywords.blank?
-        command[:route] = @mustard_url + "/executions/#{execution_id}/next_test"
+      if keyword_string != ''
+        command[:route] = @mustard_url + "/executions/#{execution_id}/next_test?#{keyword_string}"
+
       else
-        keywords_string = keywords.map{|keyword| "keyword[]=#{keyword.upcase}"}.join('&')
-        command[:route] = @mustard_url + "/executions/#{execution_id}/next_test?#{keywords_string}"
+        command[:route] = @mustard_url + "/executions/#{execution_id}/next_test"
       end
 
       command[:headers] = {'User-Token' => @user_token}
